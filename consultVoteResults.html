@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/pages.css" />
-    <title>Consultar la lista de estudiantes de la facultad</title>
+    <title>Ver resultados finales de una votación</title>
   </head>
   <body>
     <div class="grid-container">
@@ -64,23 +64,61 @@
         </ul>
       </div>
       <div class="main">
-        <h3>Consultar la lista de estudiantes de la facultad</h3>
+        <h3>Ver resultados finales de una votación</h3>
         <table>
           <thead>
             <tr>
-              <th>Nombres</th>
-              <th>Apellidos</th>
-              <th>Email</th>
-              <th>Documento</th>
+              <th>Nombre de Votacion</th>
+              <th>Fecha de Inicio</th>
+              <th>Fecha de Finalizacion</th>
+              <th>Ciclo</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Johann</td>
-              <td>Castellanos</td>
-              <td>@usantotomas.edu.co</td>
-              <td>1001818182</td>
-            </tr>
+            <tbody class="toggle">
+              <tr>
+                <td>Votacion Semestre 2022-1</td>
+                <td>10/03/2022</td>
+                <td>20/03/2022</td>
+                <td>20221</td>
+              </tr>
+            </tbody>
+            <tbody class="hidden">
+                <tr>
+                  <thead>
+                    <tr>
+                      <th colspan="2">Votos</th>
+                      <th colspan="4">Candidato</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="2">9</td>
+                      <td colspan="4">Juan Casallas</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">8</td>
+                      <td colspan="4">Juan</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">4</td>
+                      <td colspan="4">Juan</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">2</td>
+                      <td colspan="4">Juan</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">2</td>
+                      <td colspan="4">Juan</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">1</td>
+                      <td colspan="4"><label for="" id="errorLabel">Esta parte de la tabla planeo colapsarla mediante codigo</label></td>
+                    </tr>
+                  </tbody>
+                </tr>
+            </tbody>
           </tbody>
         </table>
       </div>
@@ -88,3 +126,5 @@
     </div>
   </body>
 </html>
+
+<!-- https://codepen.io/andornagy/pen/gaGBZz -->
