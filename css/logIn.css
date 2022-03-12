@@ -3,15 +3,25 @@
 }
 
 .header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: white;
+  text-align: center;
   grid-area: header;
 }
 .main {
+  margin: 20% 0 10% 10%;
+  text-align: center;
   grid-area: main;
 }
 .right {
+  margin: 10% 8% 10% 8%;
+  padding-top: 10%;
   grid-area: right;
 }
 .footer {
+  background: #263864;
   grid-area: footer;
 }
 
@@ -25,12 +35,38 @@
   padding: 10px;
 }
 
-.grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 20px 0;
-}
-
 #errorLabel {
   color: red;
+}
+
+#voteImg {
+  width: 100%;
+}
+
+#logoImg {
+  margin: 1em;
+}
+
+input {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #263864;
+}
+
+input:focus {
+  outline: 0px;
+  background: lightblue;
+  border-radius: 6px;
+}
+
+button {
+  width: 100%;
+  margin: 20px 0px 0px 0px;
+  padding: 10px 0px 10px 0px;
+  border: none;
+  background: #263864;
+  color: white;
 }
