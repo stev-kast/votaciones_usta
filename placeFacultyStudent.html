@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <title>
+      Postular estudiante a una votación de Representante de Facultad
+    </title>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="header">
+        <h1>Sistema Votaciones USTA</h1>
+      </div>
+      <div class="logOut"><br /><br /><button>Cerrar Sesion</button></div>
+      <div class="menu">
+        <ul>
+          <li><a href="createStudent.html">Crear Estudiante</a></li>
+          <li>
+            <a href="createCycleVoting.html">
+              Crear una votación de Representante de Semestre
+            </a>
+          </li>
+          <li>
+            <a href="changeCycleVotingStatus.html">
+              Cambiar el estado de una votación a Representante de Semestre
+            </a>
+          </li>
+          <li>
+            <a href="consultCycleVoting.html">
+              Consultar una votación a Representante de Semestre
+            </a>
+          </li>
+          <li>
+            <a href="createFacultyVoting.html">
+              Crear una votación de Representante de Facultad
+            </a>
+          </li>
+          <li>
+            <a href="placeFacultyStudent.html">
+              Postular estudiante a una votación de Representante de Facultad
+            </a>
+          </li>
+          <li>
+            <a href="changeFacultyVotingStatus.html">
+              Cambiar el estado de una votación a Representante de Facultad
+            </a>
+          </li>
+          <li>
+            <a href="consultFacultyVoting.html">
+              Consultar una votación a Representante de Facultad
+            </a>
+          </li>
+          <li>
+            <a href="consultVotingListDean.html">
+              Consultar la lista de votaciones</a
+            >
+          </li>
+          <li>
+            <a href="consultFacultyStudentList.html">
+              Consultar la lista de estudiantes de la facultad
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="main">
+        <h3>Postular estudiante a una votación de Representante de Facultad</h3>
+        <form action="">
+          <p>Los campos marcados con un asterisco (*) son obligatorios</p>
+          <label for="voting">Votacion*</label>
+          <select id="voting">
+            <option value="20221">Votacion Facultad 2022-1</option>
+            <option value="20212">Votacion Facultad 2021-2</option>
+          </select>
+          <br /><br />
+          <label for="student">Estudiante*</label>
+          <input type="text" id="student" />
+          <br /><br />
+          <label for="" id="errorLabel">
+            Este label indicara cuando existan errores. </label
+          ><br /><br />
+          <button>Postular Estudiante</button>
+        </form>
+      </div>
+      <div class="footer">Footer</div>
+    </div>
+  </body>
+</html>

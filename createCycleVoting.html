@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/pages.css">
+    <title>Crear una votación de Representante de Semestre</title>
+  </head>
+  <body><div class="grid-container">
+    <div class="header">
+      <h1>Sistema Votaciones USTA</h1>
+    </div>
+    <div class="logOut">
+        <br><br><button>Cerrar Sesion</button></div>
+    <div class="menu">
+      <ul>
+        <li><a href="createStudent.html">Crear Estudiante</a></li>
+        <li>
+          <a href="createCycleVoting.html">
+            Crear una votación de Representante de Semestre
+          </a>
+        </li>
+        <li>
+          <a href="changeCycleVotingStatus.html">
+            Cambiar el estado de una votación a Representante de Semestre
+          </a>
+        </li>
+        <li>
+          <a href="consultCycleVoting.html">
+            Consultar una votación a Representante de Semestre
+          </a>
+        </li>
+        <li>
+          <a href="createFacultyVoting.html">
+            Crear una votación de Representante de Facultad
+          </a>
+        </li>
+        <li>
+          <a href="placeFacultyStudent.html">
+            Postular estudiante a una votación de Representante de Facultad
+          </a>
+        </li>
+        <li>
+          <a href="changeFacultyVotingStatus.html">
+            Cambiar el estado de una votación a Representante de Facultad
+          </a>
+        </li>
+        <li>
+          <a href="consultFacultyVoting.html">
+            Consultar una votación a Representante de Facultad
+          </a>
+        </li>
+        <li>
+          <a href="consultVotingListDean.html">
+            Consultar la lista de votaciones</a
+          >
+        </li>
+        <li>
+          <a href="consultFacultyStudentList.html">
+            Consultar la lista de estudiantes de la facultad
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="main">
+      <h3>Crear una votación de Representante de Semestre</h3>
+      <form action="">
+        <p>Los campos marcados con un asterisco (*) son obligatorios</p>
+        <label for="name">Nombre de la votacion*</label>
+        <input type="text" id="name" /> <br /><br />
+        <label for="startDate">Fecha de inicio</label>*</label>
+        <input type="date" id="startDate" /> <br /><br />
+        <label for="endDate">Fecha de Finalizacion*</label>
+        <input type="date" id="endDate" /> <br /><br />
+        <label for="cycle">Ciclo*</Apellidos*</label>
+        <select id="cycle">
+          <option value="20221">2022-1</option>
+        </select><br /><br />
+        <label for="Faculty">Facultad*</label>
+        <input type="text" id="lastNames" value="Telecomunicaciones" disabled/> <br /><br />
+        <label for="" id="errorLabel">
+          Este label indicara cuando existan errores.
+        </label><br><br>
+        <button>Crear Votacion</button>
+      </form>
+    </div>
+    <div class="footer">Footer</div>
+  </div></body>
+</html>
