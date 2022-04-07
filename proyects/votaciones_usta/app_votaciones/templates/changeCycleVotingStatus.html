@@ -1,0 +1,26 @@
+{% extends "dean.html" %}
+{% load static %}
+{% block title %}Cambiar el estado de una votación a Representante de Semestre{% endblock %}
+{% block main %}
+<h3>Cambiar el estado de una votación a Representante de Semestre</h3>
+<table>
+  <tr>
+    <th>Nome de Votacion</th>
+    <th>Fecha de Inicio</th>
+    <th>Fecha de Finalizacion</th>
+    <th>Ciclo</th>
+    <th>Facultad</th>
+    <th>Estado actual</th>
+    <th>Accion</th>
+  </tr>
+  <tr>
+    <td>Votacion Facultad 2022-1</td>
+    <td>20/03/2022</td>
+    <td>30/03/2022</td>
+    <td>20221</td>
+    <td>Telecomunicaciones</td>
+    <td>postulacion,votacion,cerrada</td>
+    <td><button>"Siguiente estado"</button></td>
+  </tr>
+</table>
+{% endblock %}

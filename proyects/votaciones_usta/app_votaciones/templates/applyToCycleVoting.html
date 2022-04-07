@@ -1,0 +1,21 @@
+{% extends "student.html" %}
+{% load static %}
+{% block title %}Cambiar el estado de una votación a Representante de Semestre{% endblock %}
+{% block main %}
+<h3>Postularse como candidato a Representante de Semestre</h3>
+<form action="">
+  <label for="proposal">Propuesta*</label>
+  <textarea name="proposal" id="proposal" cols="30" rows="10"></textarea>
+  <br /><br />
+  <label for="voting">Votacion*</label>
+  <select name="voting" id="voting">
+    <option value="Votacion Semestre 2022-1">
+      Votacion Semestre 2022-1
+    </option>
+    <option value="Votacion Semestre 2022-2">
+      Votacion Semestre 2022-2
+    </option>
+  </select>
+  <button>Postularme</button>
+</form>
+{% endblock %}

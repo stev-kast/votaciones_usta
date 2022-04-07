@@ -1,0 +1,164 @@
+/* Primary Color:  #0288d1;
+  Secondary color: #4FC3F7;
+  Light Color: #B2EBF2
+
+
+  Primary Tables: #5C6BC0
+  Secondary Tables: #9fa8da
+
+  Primary Tables 2: #EC407A
+  Secondary Tables 2: #F8BBD0
+
+  Primary green: #4CAF50
+*/
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.header {
+  background: white;
+  margin-bottom: 2em;
+  text-align: center;
+  grid-area: header;
+}
+.logOut {
+  top: 2em;
+  right: 1em;
+  margin: 2em 3em 0 0;
+  background: white;
+  grid-area: logOut;
+}
+.menu {
+  background: #4fc3f7;
+  padding: 10%;
+  text-align: center;
+  grid-area: menu;
+  width: 14em;
+}
+.main {
+  padding-left: 2em;
+  margin: 5%;
+  margin-top: 0;
+  grid-area: main;
+}
+
+.footer {
+  background: #0288d1;
+  grid-area: footer;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "header header header header header logOut"
+    "menu main main main main main"
+    "footer footer footer footer footer footer";
+}
+
+dl {
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dt,
+dd {
+  padding: 5px;
+}
+
+dd:hover {
+  background-color: #b2ebf2;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+#errorLabel {
+  color: red;
+}
+
+#logoImg {
+  margin: 1em;
+}
+
+table {
+  border-collapse: collapse;
+  border: 3px;
+}
+
+th {
+  background: #5c6bc0;
+  color: white;
+  font-weight: bold;
+}
+
+td,
+th {
+  padding: 10px;
+  border: 1px solid white;
+  text-align: center;
+  font-size: 18px;
+}
+
+.toggle tr td {
+  background-color: #ccc;
+  font-weight: bold;
+  color: black;
+}
+
+input {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #0288d1;
+}
+
+select {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #0288d1;
+}
+
+input:focus {
+  outline: 0px;
+  background: rgba(173, 216, 230, 0.589);
+  border-radius: 2px;
+}
+
+button {
+  width: 100%;
+  margin: 20px 0px 0px 0px;
+  padding: 10px 0px 10px 0px;
+  border: none;
+  background: #0288d1;
+  color: white;
+}
+
+td > button {
+  background: #4caf50;
+  margin: 0;
+  padding: 5px 0px 5px 0px;
+}
+
+.logOut > button {
+  margin-top: -1em;
+  padding: 10px;
+}

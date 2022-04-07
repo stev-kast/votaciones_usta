@@ -1,0 +1,55 @@
+{% extends "student.html" %}
+{% load static %}
+{% block title %}Consultar mi voto en una votación{% endblock %}
+{% block main %}
+<h3>Consultar mi voto en una votación</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre de Votacion</th>
+      <th>Fecha de Inicio</th>
+      <th>Fecha de Finalizacion</th>
+      <th>Ciclo</th>
+      <th>Tipo</th>
+      <th>Candidato</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tbody class="toggle">
+    <tr>
+      <td>Votacion Semestre 2022-1</td>
+      <td>10/03/2022</td>
+      <td>20/03/2022</td>
+      <td>2022-1</td>
+      <td>Semestre</td>
+      <td>Camila Cabello</td>
+    </tr>
+  </tbody>
+  <tbody class="hidden">
+    <tr>
+      <thead>
+        <tr>
+          <th colspan="5">Candidato</th>
+          <th>Tu voto</th>
+        </tr>
+      </thead>
+  <tbody>
+    <tr>
+      <td colspan="5">Juan Casallas</td>
+      <td><input type="radio" disabled></td>
+    </tr>
+    <tr>
+      <td colspan="5">Ernesto Vega</td>
+      <td><input type="radio" disabled></td>
+    </tr>
+    <tr>
+      <td colspan="5">Camila Cabello</td>
+      <td><input type="radio" disabled checked></td>
+    </tr>
+  </tbody>
+  </tr>
+  </tbody>
+  </tbody>
+</table>
+{% endblock %}
+<!-- https://codepen.io/andornagy/pen/gaGBZz -->

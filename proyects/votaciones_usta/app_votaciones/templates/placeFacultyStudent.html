@@ -1,0 +1,21 @@
+{% extends "dean.html" %}
+{% load static %}
+{% block title %}Postular estudiante a una votación de Representante de Facultad{% endblock %}
+{% block main %}
+<h3>Postular estudiante a una votación de Representante de Facultad</h3>
+<form action="">
+  <p>Los campos marcados con un asterisco (*) son obligatorios</p>
+  <label for="voting">Votacion*</label>
+  <select id="voting">
+    <option value="20221">Votacion Facultad 2022-1</option>
+    <option value="20212">Votacion Facultad 2021-2</option>
+  </select>
+  <br /><br />
+  <label for="student">Estudiante*</label>
+  <input type="text" id="student" />
+  <br /><br />
+  <label for="" id="errorLabel">
+    Este label indicara cuando existan errores. </label><br /><br />
+  <button>Postular Estudiante</button>
+</form>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "dean.html" %}
+{% load static %}
+{% block title %}Consultar una votación a Representante de Facultad{% endblock %}
+{% block main %}
+<h3>Consultar una votación a Representante de Facultad</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre de Votacion</th>
+      <th>Fecha de Inicio</th>
+      <th>Fecha de Finalizacion</th>
+      <th>Ciclo</th>
+      <th>Estado actual</th>
+      <th>Cantidad total de estudiantes habilitados para votar</th>
+      <th>Cantidad de estudiantes que han votado</th>
+      <th>Porcentaje de votación</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tbody class="toggle">
+    <tr>
+      <td>Votacion Semestre 2022-1</td>
+      <td>10/03/2022</td>
+      <td>20/03/2022</td>
+      <td>20221</td>
+      <td>postulacion,votacion,cerrada</td>
+      <td>50</td>
+      <td>10</td>
+      <td>20%</td>
+    </tr>
+  </tbody>
+  <tbody class="hidden">
+    <tr>
+      <thead>
+        <tr>
+          <th colspan="2">Votos</th>
+          <th colspan="4">Candidato</th>
+          <th colspan="2">Semestre</th>
+        </tr>
+      </thead>
+  <tbody>
+    <tr>
+      <td colspan="2">9</td>
+      <td colspan="4">Juan Casallas</td>
+      <td colspan="2">9</td>
+    </tr>
+    <tr>
+      <td colspan="2">8</td>
+      <td colspan="4">Juan</td>
+      <td colspan="2">5</td>
+    </tr>
+    <tr>
+      <td colspan="2">4</td>
+      <td colspan="4">Juan</td>
+      <td colspan="2">4</td>
+    </tr>
+    <tr>
+      <td colspan="2">2</td>
+      <td colspan="4">Juan</td>
+      <td colspan="2">3</td>
+    </tr>
+    <tr>
+      <td colspan="2">2</td>
+      <td colspan="4">Juan</td>
+      <td colspan="2">2</td>
+    </tr>
+    <tr>
+      <td colspan="2">1</td>
+      <td colspan="4"><label for="" id="errorLabel">Esta parte de la tabla planeo colapsarla mediante codigo</label>
+      </td>
+      <td colspan="2">1</td>
+    </tr>
+  </tbody>
+  </tr>
+  </tbody>
+  </tbody>
+</table>
+{% endblock %}
+<!-- https://codepen.io/andornagy/pen/gaGBZz -->

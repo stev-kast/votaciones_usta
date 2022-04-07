@@ -1,0 +1,80 @@
+/* Primary Color:  #0288d1;
+  Secondary color: #4FC3F7;
+  Light Color: #B2EBF2
+*/
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.header {
+  background: white;
+  text-align: center;
+  grid-area: header;
+}
+.main {
+  margin: 20% 0 10% 10%;
+  text-align: center;
+  grid-area: main;
+}
+.right {
+  margin: 10% 8% 10% 8%;
+  padding-top: 5%;
+  grid-area: right;
+}
+
+.footer {
+  padding-bottom: 1.7em;
+  background: #0288d1;
+  grid-area: footer;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "header header header header header header"
+    "main main main right right right"
+    "footer footer footer footer footer footer";
+}
+
+#errorLabel {
+  color: red;
+}
+
+#voteImg {
+  width: 100%;
+}
+
+#logoImg {
+  margin: 1em;
+}
+
+input {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #263864;
+}
+
+input:focus {
+  outline: 0px;
+  background: rgba(173, 216, 230, 0.589);
+  border-radius: 2px;
+}
+
+button {
+  width: 100%;
+  margin: 20px 0px 0px 0px;
+  padding: 10px 0px 10px 0px;
+  border: none;
+  background: #0288d1;
+  color: white;
+}

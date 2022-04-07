@@ -1,0 +1,27 @@
+{% extends "dean.html" %}
+{% load static %}
+{% block title %}Consultar la lista de votaciones (Decano){% endblock %}
+{% block main %}
+<h3>Consultar la lista de votaciones (Decano)</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre de Votacion</th>
+      <th>Fecha de Inicio</th>
+      <th>Fecha de Finalizacion</th>
+      <th>Ciclo</th>
+      <th>Tipo de Votacion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Votacion Facultad 2022-1</td>
+      <td>10/03/2022</td>
+      <td>20/03/2022</td>
+      <td>20221</td>
+      <td>Semestre/Facultad</td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
+<!-- https://codepen.io/andornagy/pen/gaGBZz -->
