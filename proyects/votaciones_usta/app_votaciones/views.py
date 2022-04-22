@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from app_votaciones.models import Decano,Estudiante,Facultad
+from app_votaciones.models import Decano,Estudiante,Facultad, Votacion, EstadoVotacion, TipoVotacion
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -91,6 +91,28 @@ def createCycleVoting(request):
     return render(request, 'createCycleVoting.html')
 
 @login_required
+def addCycleVoting(request):
+    # Obtiene datos de la votacion
+    name = request.POST['name']
+    start_date = request.POST['startdate']
+    end_date = request.POST['enddate']
+    # TODO: cycle is not in model
+    cycle = request.POST['cycle']
+    faculty = request.POST['faculty']
+
+    facultad = Facultad.objects.get(nombre=faculty)
+    tipo = TipoVotacion.objects.get(nombre="Semestre")
+    estado = EstadoVotacion.objects.get(nombre="Postulacion")
+
+    # Crea el objeto de la votacion
+    votacion = Votacion(nombre=name,idFacultad=facultad,start_date=start_date,end_date=end_date,idTipo=tipo,idEstado=estado)
+    # Guarda la votacion 
+    votacion.save()
+
+    return redirect('app:consultVotingListDean')
+
+
+@login_required
 def changeCycleVotingStatus(request):
     return render(request, 'changeCycleVotingStatus.html')
 
@@ -101,6 +123,27 @@ def consultCycleVoting(request):
 @login_required
 def createFacultyVoting(request):
     return render(request, 'createFacultyVoting.html')
+
+@login_required
+def addFacultyVoting(request):
+    # Obtiene datos de la votacion
+    name = request.POST['name']
+    start_date = request.POST['startdate']
+    end_date = request.POST['enddate']
+    # TODO: cycle is not in model
+    cycle = request.POST['cycle']
+    faculty = request.POST['faculty']
+
+    facultad = Facultad.objects.get(nombre=faculty)
+    tipo = TipoVotacion.objects.get(nombre="Facultad")
+    estado = EstadoVotacion.objects.get(nombre="Postulacion")
+
+    # Crea el objeto de la votacion
+    votacion = Votacion(nombre=name,idFacultad=facultad,start_date=start_date,end_date=end_date,idTipo=tipo,idEstado=estado)
+    # Guarda la votacion 
+    votacion.save()
+
+    return redirect('app:consultVotingListDean')
 
 @login_required
 def placeFacultyStudent(request):

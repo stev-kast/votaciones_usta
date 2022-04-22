@@ -3,23 +3,24 @@
 {% block title %}Crear una votación de Representante de Facultad{% endblock %}
 {% block main %}
 <h3>Crear una votación de Representante de Facultad</h3>
-<form action="">
+<form action="{% url 'app:addFacultyVoting' %}" method="post">
+  {% csrf_token %}
   <p>Los campos marcados con un asterisco (*) son obligatorios</p>
   <label for="name">Nombre de la votacion*</label>
-  <input type="text" id="name" />
+  <input type="text" id="name" name="name" />
   <label for="startDate">Fecha de inicio</label>*</label>
-  <input type="date" id="startDate" />
+  <input type="date" id="startDate" name="startdate" />
   <label for="endDate">Fecha de Finalizacion*</label>
-  <input type="date" id="endDate" />
-  <label for="cycle">Ciclo*</Apellidos*< /label>
-    <select id="cycle">
-      <option value="20221">2022-1</option>
-    </select>
-    <label for="Faculty">Facultad*</label>
-    <input type="text" id="lastNames" value="Telecomunicaciones" disabled />
-    <label for="" id="errorLabel">
-      Este label indicara cuando existan errores.
-    </label>
-    <button>Crear Votacion</button>
+  <input type="date" id="endDate" name="enddate" />
+  <label for="cycle">Ciclo*</label>
+  <select id="cycle" name="cycle">
+    <option value="20221">2022-1</option>
+  </select>
+  <label for="Faculty">Facultad*</label>
+  <input type="text" id="lastNames" value="Telecomunicaciones" name="faculty" />
+  <label for="" id="errorLabel">
+    Este label indicara cuando existan errores.
+  </label>
+  <button type="submit">Crear Votacion</button>
 </form>
 {% endblock %}

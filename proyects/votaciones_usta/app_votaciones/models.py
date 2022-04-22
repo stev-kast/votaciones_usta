@@ -1,6 +1,7 @@
 from django.db import models
 # Librería de la clase User
 from django.contrib.auth.models import User
+from datetime import datetime 
 
 class Facultad(models.Model):
     nombre = models.CharField(max_length=45,null=False)
@@ -68,7 +69,14 @@ class TipoVotacion(models.Model):
 
 class Votacion(models.Model):
     nombre = models.CharField(max_length=45)
-    codigo = models.CharField(max_length=45)
+    start_date = models.DateField(
+                                auto_now=False, 
+	                            auto_now_add=False,
+                                default=datetime.now()
+    )
+    end_date = models.DateField(auto_now=False, 
+	                            auto_now_add=False,
+                                default=datetime.now())
     idTipo = models.ForeignKey(TipoVotacion,
                   related_name='votaciones',
                   null=False,                  
