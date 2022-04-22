@@ -106,6 +106,8 @@ AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
     )
 
+# Url to avoid use of the system without login
+LOGIN_URL='/logIn'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

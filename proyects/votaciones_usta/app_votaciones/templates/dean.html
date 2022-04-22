@@ -12,11 +12,9 @@
 
 <body>
   <div class="grid-container">
-    <div><span>{{ request.user.is_authenticated }}</span></div>
     <div class="header">
+      <span>{{ request.user.is_authenticated }}</span>
       <h1>Sistema Votaciones USTA</h1>
-    </div>
-    <div>
       <span>{{ request.user.email }}</span>
     </div>
     <div class="logOut">
