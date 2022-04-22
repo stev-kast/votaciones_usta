@@ -46,3 +46,44 @@ class Estudiante(models.Model):
         app_label = 'app_votaciones'
 
 
+class EstadoVotacion(models.Model):
+    nombre = models.CharField(max_length=45)
+    codigo = models.CharField(max_length=45)
+    
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        app_label = 'app_votaciones'
+
+class TipoVotacion(models.Model):
+    nombre = models.CharField(max_length=45)
+    codigo = models.CharField(max_length=45)
+    
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        app_label = 'app_votaciones'
+
+class Votacion(models.Model):
+    nombre = models.CharField(max_length=45)
+    codigo = models.CharField(max_length=45)
+    idTipo = models.ForeignKey(TipoVotacion,
+                  related_name='votaciones',
+                  null=False,                  
+                  on_delete=models.PROTECT)
+    idEstado = models.ForeignKey(EstadoVotacion,
+                  related_name='votaciones',
+                  null=False,                  
+                  on_delete=models.PROTECT)
+    idFacultad = models.ForeignKey(Facultad,
+                  related_name='votaciones',
+                  null=False,                  
+                  on_delete=models.PROTECT)
+    
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        app_label = 'app_votaciones'
