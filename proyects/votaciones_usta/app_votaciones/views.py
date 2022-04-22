@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from app_votaciones.models import Decano,Estudiante,Facultad
 
 # Create your views here.
 
@@ -8,6 +11,40 @@ def index(request):
 
 def logIn(request):
     return render(request, 'logIn.html')
+
+def view_logout(request):
+  # Cierra la sesión del usuario
+  logout(request)
+
+  # Redirecciona la página de login
+  return redirect('app:logIn')
+
+def autenticar(request):
+    # Obtiene los datos del formulario de autenticación
+    email = request.POST['email']
+    password = request.POST['password']
+
+    # Obtiene el usuario
+    #usuario = authenticate(email=email, password=password)
+    # TODO: authenticate always returning none
+    usuario = User.objects.get(email=email)
+    # Verifica si el usuario existe en la base de datos 
+    if usuario is not None:
+        # Inicia la sesión del usuario en el sistema
+        login(request, usuario)
+        # Verifica si el usuario es decano o estudiante
+        #estudiante = Estudiante.objects.get(id=usuario)
+        decano = Decano.objects.get(id=usuario)
+
+        #if(estudiante is not None):
+        #    return HttpResponse("Es estudiante")
+        if(decano is not None):
+            return render(request, 'createStudent.html')
+        # Redirecciona a una página de éxito
+        return HttpResponse("Logged")
+    else:
+        # Retorna un mensaje de error de login no válido
+        return HttpResponse(usuario)
 
 def createStudent(request):
     return render(request, 'createStudent.html')

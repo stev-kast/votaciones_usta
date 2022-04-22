@@ -1,0 +1,16 @@
+Activate Enviroment:
+    source bin/activate
+
+Start Server:
+    python manage.py runserver
+
+
+CADA VEZ QUE CAMBIA EL MODELO
+Crear Migraciones: 
+    python manage.py makemigrations
+
+Ejecutar Migraciones:
+    python manage.py migrate
+
+Inicial consola db
+    python manage.py shell

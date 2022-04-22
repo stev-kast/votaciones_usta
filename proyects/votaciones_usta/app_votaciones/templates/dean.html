@@ -1,72 +1,75 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static '/css/pages.css' %}" />
-    <title>{% block title %}{% endblock %}</title>
-  </head>
-  <body>
-    <div class="grid-container">
-      <div class="header">
-        <h1>Sistema Votaciones USTA</h1>
-      </div>
-      <div class="logOut">
-        <button>Cerrar Sesion</button>
-      </div>
-      <div class="menu">
-        <dl>
-          <dt>Crear</dt>
-          <dd><a href="/createStudent">Estudiante</a></dd>
-          <dd>
-            <a href="/createCycleVoting"> Votación de Semestre </a>
-          </dd>
-          <dd>
-            <a href="/createFacultyVoting"> Votación de Facultad </a>
-          </dd>
-          <dt>Cambiar</dt>
-          <dd>
-            <a href="/changeCycleVotingStatus">
-              Estado de votación de Semestre
-            </a>
-          </dd>
-          <dd>
-            <a href="/changeFacultyVotingStatus">
-              Estado de votación de Facultad
-            </a>
-          </dd>
-          <dt>Consultar</dt>
-          <dd>
-            <a href="/consultCycleVoting"> Votación por Semestres </a>
-          </dd>
 
-          <dd>
-            <a href="/consultFacultyVoting"> Votación por Facultad </a>
-          </dd>
-          <dd>
-            <a href="/consultVotingListDean"> Lista de votaciones</a>
-          </dd>
-          <dd>
-            <a href="/consultFacultyStudentList"> Lista de estudiantes </a>
-          </dd>
-          <dt>Postular</dt>
-          <dd>
-            <a href="/placeFacultyStudent">
-              Estudiante a votación de Facultad
-            </a>
-          </dd>
-        </dl>
-      </div>
-      <div class="main">{% block main%}{% endblock %}</div>
-      <div class="footer">
-        <img
-          id="logoImg"
-          src="{% static '/img/logo_usta_white.webp' %}"
-          alt="logo USTA"
-        />
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static '/css/pages.css' %}" />
+  <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+  <div class="grid-container">
+    <div><span>{{ request.user.is_authenticated }}</span></div>
+    <div class="header">
+      <h1>Sistema Votaciones USTA</h1>
     </div>
-  </body>
+    <div>
+      <span>{{ request.user.email }}</span>
+    </div>
+    <div class="logOut">
+      <a href="{% url 'app:view_logout' %}">Cerrar Sesion</a>
+    </div>
+    <div class="menu">
+      <dl>
+        <dt>Crear</dt>
+        <dd><a href="/createStudent">Estudiante</a></dd>
+        <dd>
+          <a href="/createCycleVoting"> Votación de Semestre </a>
+        </dd>
+        <dd>
+          <a href="/createFacultyVoting"> Votación de Facultad </a>
+        </dd>
+        <dt>Cambiar</dt>
+        <dd>
+          <a href="/changeCycleVotingStatus">
+            Estado de votación de Semestre
+          </a>
+        </dd>
+        <dd>
+          <a href="/changeFacultyVotingStatus">
+            Estado de votación de Facultad
+          </a>
+        </dd>
+        <dt>Consultar</dt>
+        <dd>
+          <a href="/consultCycleVoting"> Votación por Semestres </a>
+        </dd>
+
+        <dd>
+          <a href="/consultFacultyVoting"> Votación por Facultad </a>
+        </dd>
+        <dd>
+          <a href="/consultVotingListDean"> Lista de votaciones</a>
+        </dd>
+        <dd>
+          <a href="/consultFacultyStudentList"> Lista de estudiantes </a>
+        </dd>
+        <dt>Postular</dt>
+        <dd>
+          <a href="/placeFacultyStudent">
+            Estudiante a votación de Facultad
+          </a>
+        </dd>
+      </dl>
+    </div>
+    <div class="main">{% block main%}{% endblock %}</div>
+    <div class="footer">
+      <img id="logoImg" src="{% static '/img/logo_usta_white.webp' %}" alt="logo USTA" />
+    </div>
+  </div>
+</body>
+
 </html>
