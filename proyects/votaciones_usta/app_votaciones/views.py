@@ -159,7 +159,11 @@ def consultFacultyVoting(request):
 
 @login_required
 def consultVotingListDean(request):
-    return render(request, 'consultVotingListDean.html')
+    query = Votacion.objects.all()
+    lista = list(query.values())
+    contexto = {"votaciones":lista}
+    print(contexto)
+    return render(request, 'consultVotingListDean.html',contexto)
 
 @login_required
 def applyToCycleVoting(request):

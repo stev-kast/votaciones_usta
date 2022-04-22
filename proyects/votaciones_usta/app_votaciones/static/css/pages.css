@@ -83,7 +83,17 @@ dd:hover {
 
 a {
   text-decoration: none;
-  color: black;
+  color: #000;
+}
+
+.logOut a {
+  text-decoration: none;
+  width: 100%;
+  margin: 20px;
+  padding: 10px;
+  border: none;
+  background: #0288d1;
+  color: white;
 }
 
 #errorLabel {

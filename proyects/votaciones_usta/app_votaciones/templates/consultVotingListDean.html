@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Consultar la lista de votaciones (Decano){% endblock %}
 {% block main %}
+
 <h3>Consultar la lista de votaciones (Decano)</h3>
 <table>
   <thead>
@@ -14,13 +15,23 @@
     </tr>
   </thead>
   <tbody>
+
+    {% if votaciones %}
+    {% for votacion in votaciones %}
     <tr>
-      <td>Votacion Facultad 2022-1</td>
-      <td>10/03/2022</td>
-      <td>20/03/2022</td>
-      <td>20221</td>
-      <td>Semestre/Facultad</td>
+      <td>{{votacion.nombre}}</td>
+      <td>{{votacion.start_date}}</td>
+      <td>{{votacion.end_date}}</td>
+      <td>Update Model!</td>
+      {% if votacion.idTipo_id == 1 %}
+      <td>Semestre</td>
+      {% else %}
+      <td>Facultad</td>
+      {% endif %}
     </tr>
+    {% endfor %}
+
+    {% endif %}
   </tbody>
 </table>
 {% endblock %}

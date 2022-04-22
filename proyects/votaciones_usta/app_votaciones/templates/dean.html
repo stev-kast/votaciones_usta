@@ -13,11 +13,11 @@
 <body>
   <div class="grid-container">
     <div class="header">
-      <span>{{ request.user.is_authenticated }}</span>
+      <!-- <span>{{ request.user.is_authenticated }}</span> -->
       <h1>Sistema Votaciones USTA</h1>
-      <span>{{ request.user.email }}</span>
     </div>
     <div class="logOut">
+      <span>{{ request.user.email }}</span>
       <a href="{% url 'app:view_logout' %}">Cerrar Sesion</a>
     </div>
     <div class="menu">
