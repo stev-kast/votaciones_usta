@@ -4,6 +4,9 @@
 {% block main %}
 
 <h3>Consultar la lista de votaciones (Decano)</h3>
+{% if facultad %}
+  <h4> Facultad: {{ facultad.nombre }} </h4>
+{% endif %}
 <table>
   <thead>
     <tr>
@@ -17,6 +20,7 @@
   <tbody>
     {% if votaciones %}
     {% for votacion in votaciones %}
+    {% if facultad_id == votacion.idFacultad_id %}
     <tr>
       <td>{{votacion.nombre}}</td>
       <td>{{votacion.start_date}}</td>
@@ -28,6 +32,7 @@
       <td>Facultad</td>
       {% endif %}
     </tr>
+    {% endif %}
     {% endfor %}
     {% endif %}
   </tbody>

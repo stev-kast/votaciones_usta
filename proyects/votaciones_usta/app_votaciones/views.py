@@ -191,7 +191,8 @@ def consultFacultyVoting(request):
 def consultVotingListDean(request):
     query = Votacion.objects.all()
     lista = list(query.values())
-    contexto = {"votaciones":lista}
+    fac = Facultad.objects.get(id=Decano.objects.get(id=request.user.id).idFacultad_id)
+    contexto = {"votaciones":lista, "facultad":fac, "facultad_id":fac.id }
     return render(request, 'consultVotingListDean.html',contexto)
 
 @login_required
