@@ -24,7 +24,7 @@ class Decano(models.Model):
                 on_delete=models.PROTECT)
     
     def __str__(self):
-        return self.nombre
+        return self.id
 
     class Meta:
         app_label = 'app_votaciones'
@@ -72,11 +72,10 @@ class Votacion(models.Model):
     start_date = models.DateField(
                                 auto_now=False, 
 	                            auto_now_add=False,
-                                default=datetime.now()
     )
     end_date = models.DateField(auto_now=False, 
 	                            auto_now_add=False,
-                                default=datetime.now())
+                                )
     idTipo = models.ForeignKey(TipoVotacion,
                   related_name='votaciones',
                   null=False,                  
@@ -90,6 +89,47 @@ class Votacion(models.Model):
                   null=False,                  
                   on_delete=models.PROTECT)
     
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        app_label = 'app_votaciones'
+
+class Candidato(models.Model):
+    idEstudiante = models.ForeignKey(Estudiante,
+        related_name='candidatos',
+        null=False,                  
+        on_delete=models.PROTECT
+    )
+    idVotacion = models.ForeignKey(Votacion,
+        related_name='candidatos',
+        null=False,
+        on_delete=models.PROTECT
+    )
+    semestre = models.IntegerField(null=False)
+    propuesta = models.CharField(max_length=200)
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        app_label = 'app_votaciones'
+
+class Voto(models.Model):
+    idVotante = models.ForeignKey(Estudiante,
+        related_name='votos',
+        null=False,                  
+        on_delete=models.PROTECT
+    )
+    idCandidato = models.ForeignKey(Candidato,
+        related_name='votos',
+        null=False,
+        on_delete=models.PROTECT
+    )
+    fechaHora = models.DateField(auto_now=False, 
+        auto_now_add=False,
+    )
+
+
     def __str__(self):
         return self.nombre
 

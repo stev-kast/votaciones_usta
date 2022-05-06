@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from app_votaciones.models import Decano,Estudiante,Facultad, Votacion, EstadoVotacion, TipoVotacion
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
 
 # Create your views here.
 
@@ -13,14 +14,14 @@ def index(request):
 def logIn(request):
     return render(request, 'logIn.html')
 
-	
+
 @login_required
 def view_logout(request):
-  # Cierra la sesión del usuario
-  logout(request)
+    # Cierra la sesión del usuario
+    logout(request)
 
-  # Redirecciona la página de login
-  return redirect('app:logIn')
+    # Redirecciona la página de login
+    return redirect('app:logIn')
 
 def autenticar(request):
     # Obtiene los datos del formulario de autenticación
@@ -31,7 +32,7 @@ def autenticar(request):
     #usuario = authenticate(email=email, password=password)
     # TODO: authenticate always returning none
     usuario = User.objects.get(email=email)
-    # Verifica si el usuario existe en la base de datos 
+    # Verifica si el usuario existe en la base de datos
     if usuario is not None:
         # Inicia la sesión del usuario en el sistema
         login(request, usuario)
@@ -56,7 +57,13 @@ def autenticar(request):
 
 @login_required
 def createStudent(request):
-    return render(request, 'createStudent.html')
+    if request.user.is_superuser:
+        query = Decano.objects.get(id_id=request.user.id)
+        query = Facultad.objects.get(id=query.idFacultad_id)
+        contexto = {"Facultad":query.nombre}
+        return render(request, 'createStudent.html',contexto)
+    else:
+        redirect('app:view_logout')
 
 @login_required
 def addStudent(request):
@@ -88,7 +95,10 @@ def addStudent(request):
 
 @login_required
 def createCycleVoting(request):
-    return render(request, 'createCycleVoting.html')
+    query = Decano.objects.get(id_id=request.user.id)
+    query = Facultad.objects.get(id=query.idFacultad_id)
+    contexto = {"Facultad":query.nombre}
+    return render(request, 'createCycleVoting.html',contexto)
 
 @login_required
 def addCycleVoting(request):
@@ -106,7 +116,7 @@ def addCycleVoting(request):
 
     # Crea el objeto de la votacion
     votacion = Votacion(nombre=name,idFacultad=facultad,start_date=start_date,end_date=end_date,idTipo=tipo,idEstado=estado)
-    # Guarda la votacion 
+    # Guarda la votacion
     votacion.save()
 
     return redirect('app:consultVotingListDean')
@@ -122,7 +132,10 @@ def consultCycleVoting(request):
 
 @login_required
 def createFacultyVoting(request):
-    return render(request, 'createFacultyVoting.html')
+    query = Decano.objects.get(id_id=request.user.id)
+    query = Facultad.objects.get(id=query.idFacultad_id)
+    contexto = {"Facultad":query.nombre}
+    return render(request, 'createFacultyVoting.html',contexto)
 
 @login_required
 def addFacultyVoting(request):
@@ -140,7 +153,7 @@ def addFacultyVoting(request):
 
     # Crea el objeto de la votacion
     votacion = Votacion(nombre=name,idFacultad=facultad,start_date=start_date,end_date=end_date,idTipo=tipo,idEstado=estado)
-    # Guarda la votacion 
+    # Guarda la votacion
     votacion.save()
 
     return redirect('app:consultVotingListDean')

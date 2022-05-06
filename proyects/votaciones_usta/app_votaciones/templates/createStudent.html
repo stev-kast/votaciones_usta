@@ -26,12 +26,14 @@
   <label for="email">Email*</label>
   <input type="email" id="email" name="email" />
   <label for="id">Documento</label>*</label>
-  <input type="number" id="id" name="document" />
-  <label for="Faculty">Facultad*</label>
-  <input type="text" id="faculty" value="Telecomunicaciones" name="faculty" />
-  <label for="" id="errorLabel">
-    Este label indicara cuando existan errores.
-  </label>
-  <button type="submit">Crear Estudiante</button>
+<input type="number" id="id" name="document" />
+{% if Facultad %}
+<label for="Faculty">Facultad: {{Facultad}}</label>
+<input type="text" id="faculty" value={{Facultad}} name="faculty" hidden />
+{% endif %}
+<label for="" id="errorLabel">
+  Este label indicara cuando existan errores.
+</label>
+<button type="submit">Crear Estudiante</button>
 </form>
 {% endblock %}

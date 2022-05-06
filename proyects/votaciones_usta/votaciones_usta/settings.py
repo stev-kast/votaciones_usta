@@ -103,7 +103,8 @@ AUTH_PASSWORD_VALIDATORS = [
 #Authentication backends
 # To solve authenticate returning none
 AUTHENTICATION_BACKENDS = (
-        'django.contrib.auth.backends.ModelBackend',
+        #'django.contrib.auth.backends.ModelBackend',
+        'app_votaciones.backends.EmailBackend',
     )
 
 # Url to avoid use of the system without login

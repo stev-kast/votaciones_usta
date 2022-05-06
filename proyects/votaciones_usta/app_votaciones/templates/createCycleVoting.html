@@ -10,19 +10,21 @@
   <label for="name">Nombre de la votacion*</label>
   <input type="text" id="name" name="name" />
   <label for="startDate">Fecha de inicio</label>*</label>
-  <input type="date" id="startDate" name="startdate" />
-  <label for="endDate">Fecha de Finalizacion*</label>
-  <input type="date" id="endDate" name="enddate" />
-  <label for="cycle">Ciclo*</label>
-  <select id="cycle" name="cycle">
-    <option value="20221">2022-1</option>
-  </select>
-  <label for="Faculty">Facultad*</label>
-  <input type="text" id="faculty" value="Telecomunicaciones" name="faculty" />
-  <label for="" id="errorLabel">
-    Este label indicara cuando existan errores.
-  </label>
-  <button type="submit">Crear Votacion</button>
+<input type="date" id="startDate" name="startdate" />
+<label for="endDate">Fecha de Finalizacion*</label>
+<input type="date" id="endDate" name="enddate" />
+<label for="cycle">Ciclo*</label>
+<select id="cycle" name="cycle">
+  <option value="20221">2022-1</option>
+</select>
+{% if Facultad %}
+<label for="Faculty">Facultad: {{Facultad}}</label>
+<input type="text" id="faculty" value={{Facultad}} name="faculty" hidden />
+{% endif %}
+<label for="" id="errorLabel">
+  Este label indicara cuando existan errores.
+</label>
+<button type="submit">Crear Votacion</button>
 </form>
 
 {% endblock %}
