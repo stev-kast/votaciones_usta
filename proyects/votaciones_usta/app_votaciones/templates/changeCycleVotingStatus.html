@@ -3,24 +3,47 @@
 {% block title %}Cambiar el estado de una votación a Representante de Semestre{% endblock %}
 {% block main %}
 <h3>Cambiar el estado de una votación a Representante de Semestre</h3>
+{% if facultad %}
+  <h4> Facultad: {{ facultad.nombre }} </h4>
+{% endif %}
+
 <table>
-  <tr>
-    <th>Nome de Votacion</th>
-    <th>Fecha de Inicio</th>
-    <th>Fecha de Finalizacion</th>
-    <th>Ciclo</th>
-    <th>Facultad</th>
-    <th>Estado actual</th>
-    <th>Accion</th>
-  </tr>
-  <tr>
-    <td>Votacion Facultad 2022-1</td>
-    <td>20/03/2022</td>
-    <td>30/03/2022</td>
-    <td>20221</td>
-    <td>Telecomunicaciones</td>
-    <td>postulacion,votacion,cerrada</td>
-    <td><button>"Siguiente estado"</button></td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Nombre de Votacion</th>
+      <th>Fecha de Inicio</th>
+      <th>Fecha de Finalizacion</th>
+      <th>Ciclo</th>
+      <th>Estado actual</th>
+      <th>Accion</th>
+    </tr>
+
+  </thead> 
+  <tbody>
+    {% if votaciones %}
+    {% for votacion in votaciones %}
+
+    {% if votacion.idTipo_id == 1 and facultad_id == votacion.idFacultad_id %}
+    <tr>
+      <td>{{votacion.nombre}}</td>
+      <td>{{votacion.start_date}}</td>
+      <td>{{votacion.end_date}}</td>
+      <td>Update Model!</td>
+      {% if votacion.idEstado_id == 1 %}
+      <td> Postulación </td>
+      {% elif votacion.idEstado_id == 2 %}
+      <td> Votacion </td>
+      {% else %}
+      <td> Cerrada </td>
+      {% endif %}
+      <form action="{% url 'app:nextStatus' %}" method="post">
+        {% csrf_token %}
+        <td><button type="submit" name='id' value={{votacion.id}}>"Siguiente estado"</button></td>
+      </form>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+  </tbody>
 </table>
 {% endblock %}

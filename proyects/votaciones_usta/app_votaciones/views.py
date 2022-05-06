@@ -124,7 +124,20 @@ def addCycleVoting(request):
 
 @login_required
 def changeCycleVotingStatus(request):
-    return render(request, 'changeCycleVotingStatus.html')
+    query = Votacion.objects.all()
+    lista = list(query.values())
+    fac = Facultad.objects.get(id=Decano.objects.get(id=request.user.id).idFacultad_id)
+    contexto = {"votaciones":lista, "facultad":fac, "facultad_id":fac.id }
+    return render(request, 'changeCycleVotingStatus.html',contexto)
+
+@login_required
+def nextStatus(request):
+    idVotacion = request.POST['id']
+    votacion = Votacion.objects.get(id=idVotacion)
+    if votacion.idEstado_id < 3:
+        votacion.idEstado = EstadoVotacion.objects.get(id=votacion.idEstado_id+1)
+        votacion.save()
+    return redirect('app:changeCycleVotingStatus')
 
 @login_required
 def consultCycleVoting(request):
@@ -164,7 +177,11 @@ def placeFacultyStudent(request):
 
 @login_required
 def changeFacultyVotingStatus(request):
-    return render(request, 'changeFacultyVotingStatus.html')
+    query = Votacion.objects.all()
+    lista = list(query.values())
+    fac = Facultad.objects.get(id=Decano.objects.get(id=request.user.id).idFacultad_id)
+    contexto = {"votaciones":lista, "facultad":fac, "facultad_id":fac.id }
+    return render(request, 'changeFacultyVotingStatus.html',contexto)
 
 @login_required
 def consultFacultyVoting(request):
@@ -175,7 +192,6 @@ def consultVotingListDean(request):
     query = Votacion.objects.all()
     lista = list(query.values())
     contexto = {"votaciones":lista}
-    print(contexto)
     return render(request, 'consultVotingListDean.html',contexto)
 
 @login_required
