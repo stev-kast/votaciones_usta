@@ -63,7 +63,7 @@ def createStudent(request):
         contexto = {"Facultad":query.nombre}
         return render(request, 'createStudent.html',contexto)
     else:
-        redirect('app:view_logout')
+        redirect('app:logIn')
 
 @login_required
 def addStudent(request):
@@ -72,7 +72,6 @@ def addStudent(request):
     last_name = request.POST['lastnames']
     cycle = request.POST['cycle']
     email = request.POST['email']
-    username = request.POST['document']
     password = request.POST['document']
     faculty = request.POST['faculty']
     # Crea el objeto usuario
@@ -80,7 +79,7 @@ def addStudent(request):
         first_name=names,
         last_name=last_name,
         email=email,
-        username=username)
+        username=email)
     usuario.set_password(password)
     # Guarda el usuario en la base de datos
     usuario.save()
@@ -91,7 +90,7 @@ def addStudent(request):
     estudiante = Estudiante(id=usuario,idFacultad=facultad,semestre=cycle)
     #Guarda el estudiante en la base de datos
     estudiante.save()
-    return redirect('app:logIn')
+    return redirect('app:consultFacultyStudentList')
 
 @login_required
 def createCycleVoting(request):
@@ -141,7 +140,12 @@ def nextStatus(request):
 
 @login_required
 def consultCycleVoting(request):
-    return render(request, 'consultCycleVoting.html')
+    query = Votacion.objects.all()
+    lista = list(query.values())
+    fac = Facultad.objects.get(id=Decano.objects.get(id=request.user.id).idFacultad_id)
+    contexto = {"votaciones":lista, "facultad":fac, "facultad_id":fac.id }
+    return render(request, 'consultCycleVoting.html', contexto)
+
 
 @login_required
 def createFacultyVoting(request):
@@ -221,4 +225,14 @@ def consultVotingListStudent(request):
 
 @login_required
 def consultFacultyStudentList(request):
-    return render(request, 'consultFacultyStudentList.html')
+    # Obtiene la facultad del decano
+    fac = Facultad.objects.get(id=Decano.objects.get(id=request.user.id).idFacultad_id)
+    # Obtiene los estudiantes de la facultad del decano
+    query = Estudiante.objects.filter(idFacultad=fac)
+    # Se obtienen los usuarios que son estudiantes de la facultad del decano
+    estudiantes = []
+    for i in query:
+        estudiantes.append(list(User.objects.filter(id=i.id_id).values())[0])
+    # Se configura el objeto para enviar al template
+    contexto = {"estudiantes":estudiantes, "facultad":fac, "facultad_id":fac.id }
+    return render(request, 'consultFacultyStudentList.html', contexto)

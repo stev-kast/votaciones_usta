@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Consultar la lista de estudiantes de la facultad{% endblock %}
 {% block main %}
-<h3>Consultar la lista de estudiantes de la facultad</h3>
+<h3>Consultar la lista de estudiantes de la facultad de {{facultad.nombre}}</h3>
 <table>
   <thead>
     <tr>
@@ -13,12 +13,16 @@
     </tr>
   </thead>
   <tbody>
+    {% if estudiantes %}
+    {% for estudiante in estudiantes %}
     <tr>
-      <td>Johann</td>
-      <td>Castellanos</td>
-      <td>@usantotomas.edu.co</td>
-      <td>1001818182</td>
+      <td>{{ estudiante.first_name}}</td>
+      <td>{{ estudiante.last_name}}</td>
+      <td>{{ estudiante.email}}</td>
+      <td>{{ estudiante.username}}</td>
     </tr>
+    {% endfor %}
+    {% endif %}
   </tbody>
 </table>
 {% endblock %}

@@ -17,82 +17,76 @@
     </tr>
   </thead>
   <tbody>
-  <tbody class="toggle">
+    {% if votaciones %}
+    {% for votacion in votaciones %}
+
+    {% if votacion.idTipo_id == 1 and facultad_id == votacion.idFacultad_id %}
     <tr>
-      <td>Votacion Semestre 2022-1</td>
-      <td>10/03/2022</td>
-      <td>20/03/2022</td>
-      <td>20221</td>
-      <td>postulacion,votacion,cerrada</td>
-      <td>50</td>
-      <td>10</td>
-      <td>20%</td>
+      <td>{{votacion.nombre}}</td>
+      <td>{{votacion.start_date}}</td>
+      <td>{{votacion.end_date}}</td>
+      <td>Update Model!</td>
+      {% if votacion.idEstado_id == 1 %}
+      <td> Postulación </td>
+      {% elif votacion.idEstado_id == 2 %}
+      <td> Votacion </td>
+      {% else %}
+      <td> Cerrada </td>
+      {% endif %}
+      <form action="{% url 'app:nextStatus' %}" method="post">
+        {% csrf_token %}
+        <td><button type="submit" name='id' value={{votacion.id}}>"Siguiente estado"</button></td>
+      </form>
     </tr>
-  </tbody>
-  <tbody class="hidden">
-    <thead>
-      <tr>
-        <th colspan="2">Semestre</th>
-        <th colspan="4">Candidato con mayor numero de votos</th>
-        <th colspan="2">Numero de votos</th>
-      </tr>
-    </thead>
-  <tbody>
-    <tr>
-      <td colspan="2">1</td>
-      <td colspan="4">Juan Casallas</td>
-      <td colspan="2">1</td>
-    </tr>
-    <tr>
-      <td colspan="2">2</td>
-      <td colspan="4">Juan</td>
-      <td colspan="2">1</td>
-    </tr>
-    <tr>
-      <td colspan="2">3</td>
-      <td colspan="4">Juan</td>
-      <td colspan="2">1</td>
-    </tr>
-    <tr>
-      <td colspan="2">4</td>
-      <td colspan="4">Juan</td>
-      <td colspan="2">1</td>
-    </tr>
-    <tr>
-      <td colspan="2">5</td>
-      <td colspan="4">Juan</td>
-      <td colspan="2">1</td>
-    </tr>
-    <tr>
-      <td colspan="2">6</td>
-      <td colspan="4">Juan</td>
-      <td colspan="2">1</td>
-    </tr>
-    <tr>
-      <td colspan="2">7</td>
-      <td colspan="4"><label for="" id="errorLabel">En caso de empate se muestran dos candidatos separados por
-          comas</label></td>
-      <td colspan="2">1</td>
-    </tr>
-    <tr>
-      <td colspan="2">8</td>
-      <td colspan="4"><label for="" id="errorLabel">Juan Casallas, Camila Cabello</label></td>
-      <td colspan="2">1</td>
-    </tr>
-    <tr>
-      <td colspan="2">9</td>
-      <td colspan="4"><label for="" id="errorLabel">En caso de empate se muestran dos resultados separados por comas
-          --></label></td>
-      <td colspan="2">1,1</td>
-    </tr>
-    <tr>
-      <td colspan="2">10</td>
-      <td colspan="4"><label for="" id="errorLabel">Esta parte de la tabla planeo colapsarla mediante codigo</label>
-      </td>
-      <td colspan="2">1</td>
-    </tr>
-  </tbody>
-  </tbody>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    <!-- <tr> -->
+    <!--   <th colspan="2">Semestre</th> -->
+    <!--   <th colspan="4">Candidato con mayor numero de votos</th> -->
+    <!--   <th colspan="2">Numero de votos</th> -->
+    <!-- </tr> -->
+    <!-- <tr> -->
+    <!--   <td colspan="2">1</td> -->
+    <!--   <td colspan="4">Juan Casallas</td> -->
+    <!--   <td colspan="2">1</td> -->
+    <!-- </tr> -->
+    <!-- <tr> -->
+    <!--   <td colspan="2">2</td> -->
+    <!--   <td colspan="4">Juan</td> -->
+    <!--   <td colspan="2">1</td> -->
+    <!-- </tr> -->
+    <!-- <tr> -->
+    <!--   <td colspan="2">3</td> -->
+    <!--   <td colspan="4">Juan</td> -->
+    <!--   <td colspan="2">1</td> -->
+    <!-- </tr> -->
+    <!-- <tr> -->
+    <!--   <td colspan="2">4</td> -->
+    <!--   <td colspan="4">Juan</td> -->
+    <!--   <td colspan="2">1</td> -->
+    <!-- </tr> -->
+    <!-- <tr> -->
+    <!--   <td colspan="2">5</td> -->
+    <!--   <td colspan="4">Juan</td> -->
+    <!--   <td colspan="2">1</td> -->
+    <!-- </tr> -->
+    <!-- <tr> -->
+    <!--   <td colspan="2">6</td> -->
+    <!--   <td colspan="4">Juan</td> -->
+    <!--   <td colspan="2">1</td> -->
+    <!-- </tr> -->
+    <!-- <tr> -->
+    <!--   <td colspan="2">7</td> -->
+    <!--   <td colspan="4"><label for="" id="errorLabel">En caso de empate se muestran dos candidatos separados por -->
+    <!--       comas</label></td> -->
+    <!--   <td colspan="2">1</td> -->
+    <!-- </tr> -->
+    <!-- <tr> -->
+    <!--   <td colspan="2">8</td> -->
+    <!--   <td colspan="4"><label for="" id="errorLabel">Juan Casallas, Camila Cabello</label></td> -->
+    <!--   <td colspan="2">1</td> -->
+    <!-- </tr> -->
   </tbody>
 </table>
 {% endblock %}
