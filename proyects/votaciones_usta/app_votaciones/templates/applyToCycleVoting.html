@@ -9,12 +9,13 @@
   <br /><br />
   <label for="voting">Votacion*</label>
   <select name="voting" id="voting">
-    <option value="Votacion Semestre 2022-1">
-      Votacion Semestre 2022-1
+    {% if votaciones %}
+    {% for votacion in votaciones %}
+    <option value={{votacion.id}}>
+      {{ votacion.nombre }}
     </option>
-    <option value="Votacion Semestre 2022-2">
-      Votacion Semestre 2022-2
-    </option>
+    {% endfor %}
+    {% endif %}
   </select>
   <button>Postularme</button>
 </form>

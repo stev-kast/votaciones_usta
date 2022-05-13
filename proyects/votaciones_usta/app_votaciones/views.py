@@ -201,7 +201,9 @@ def consultVotingListDean(request):
 
 @login_required
 def applyToCycleVoting(request):
-    return render(request, 'applyToCycleVoting.html')
+    votaciones = Votacion.objects.filter(idFacultad=Estudiante.objects.get(id=request.user.id).idFacultad_id)
+    contexto = {"votaciones":votaciones}
+    return render(request, 'applyToCycleVoting.html',contexto)
 
 @login_required
 def voteCycle(request):
