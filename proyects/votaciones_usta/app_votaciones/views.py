@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from app_votaciones.models import Decano,Estudiante,Facultad, Votacion, EstadoVotacion, TipoVotacion
+from app_votaciones.models import Decano,Estudiante,Facultad, Votacion, EstadoVotacion, TipoVotacion, Candidato, Voto
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 
@@ -204,6 +204,15 @@ def applyToCycleVoting(request):
     votaciones = Votacion.objects.filter(idFacultad=Estudiante.objects.get(id=request.user.id).idFacultad_id)
     contexto = {"votaciones":votaciones}
     return render(request, 'applyToCycleVoting.html',contexto)
+
+@login_required
+def applyToVoting(request):
+    propuesta = request.POST['proposal']
+    votacion = request.POST['voting']
+    candidato = Candidato(idEstudiante=Estudiante.objects.get(id=request.user.id),idVotacion=Votacion.objects.get(id=votacion),propuesta=propuesta,semestre=Estudiante.objects.get(id=request.user.id).semestre) 
+    print(propuesta,votacion)
+    candidato.save()
+    return redirect('app:applyToCycleVoting')
 
 @login_required
 def voteCycle(request):

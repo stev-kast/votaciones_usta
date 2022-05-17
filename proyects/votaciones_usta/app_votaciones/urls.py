@@ -24,6 +24,7 @@ urlpatterns = [
     path('consultVotingListDean/', views.consultVotingListDean, name='consultVotingListDean'),
     #
     path('applyToCycleVoting/', views.applyToCycleVoting, name='applyToCycleVoting'),
+    path('applyToVoting/', views.applyToVoting, name='applyToVoting'),
     path('voteCycle/', views.voteCycle, name='voteCycle'),
     path('voteFaculty/', views.voteFaculty, name='voteFaculty'),
     path('consultVoteResults/', views.consultVoteResults, name='consultVoteResults'),

@@ -3,7 +3,8 @@
 {% block title %}Cambiar el estado de una votación a Representante de Semestre{% endblock %}
 {% block main %}
 <h3>Postularse como candidato a Representante de Semestre</h3>
-<form action="">
+<form action="{% url 'app:applyToVoting' %}" method="post">
+  {% csrf_token %}
   <label for="proposal">Propuesta*</label>
   <textarea name="proposal" id="proposal" cols="30" rows="10"></textarea>
   <br /><br />
@@ -11,12 +12,14 @@
   <select name="voting" id="voting">
     {% if votaciones %}
     {% for votacion in votaciones %}
+    {% if votacion.idEstado_id == 1 %}
     <option value={{votacion.id}}>
-      {{ votacion.nombre }}
+    {{ votacion.nombre }}
     </option>
+    {% endif %}
     {% endfor %}
     {% endif %}
   </select>
-  <button>Postularme</button>
+  <button type="submit">Postularme</button>
 </form>
 {% endblock %}
