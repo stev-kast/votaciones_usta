@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from app_votaciones.models import Decano,Estudiante,Facultad, Votacion, EstadoVotacion, TipoVotacion, Candidato, Voto
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
+from datetime import datetime
 
 # Create your views here.
 
@@ -209,17 +210,45 @@ def applyToCycleVoting(request):
 def applyToVoting(request):
     propuesta = request.POST['proposal']
     votacion = request.POST['voting']
-    candidato = Candidato(idEstudiante=Estudiante.objects.get(id=request.user.id),idVotacion=Votacion.objects.get(id=votacion),propuesta=propuesta,semestre=Estudiante.objects.get(id=request.user.id).semestre) 
+    candidato = Candidato(idEstudiante=Estudiante.objects.get(id=request.user.id),idVotacion=Votacion.objects.get(id=votacion),propuesta=propuesta,semestre=Estudiante.objects.get(id=request.user.id).semestre)
     print(propuesta,votacion)
     candidato.save()
     return redirect('app:applyToCycleVoting')
 
 @login_required
 def voteCycle(request):
+    votaciones = Votacion.objects.filter(idFacultad=Estudiante.objects.get(id=request.user.id).idFacultad_id)
+    contexto = {"votaciones":votaciones}
+    return render(request, 'voteCycle.html', contexto)
+
+@login_required
+def vote(request):
+    candidato = request.POST['id']
+    votante = request.user.id
+    voto = Voto(idCandidato=Candidato.objects.get(id=candidato),
+                idVotante=Estudiante.objects.get(id=votante),
+                fechaHora=datetime.now())
+    voto.save()
+    print(voto)
     return render(request, 'voteCycle.html')
 
 @login_required
+def listCandidates(request):
+    candidatos = list(Candidato.objects.filter(idVotacion=request.POST['id']))
+    # Se obtienen los usuarios que son candidatos a la votacion
+    estudiantes = []
+    for i in candidatos:
+        estudiantes.append({"nombre":list(User.objects.filter(id=i.idEstudiante_id).values())[0].get("first_name"),
+                            "apellido":list(User.objects.filter(id=i.idEstudiante_id).values())[0].get("last_name"), 
+                            "propuesta":i.propuesta, "idCandidato":i.id})
+    contexto = {'estudiantes': estudiantes}
+    return render(request, 'listCandidates.html', contexto)
+
+
+@login_required
 def voteFaculty(request):
+    votaciones = Votacion.objects.filter(idFacultad=Estudiante.objects.get(id=request.user.id).idFacultad_id)
+    contexto = {"votaciones":votaciones}
     return render(request, 'voteFaculty.html')
 
 @login_required

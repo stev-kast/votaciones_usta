@@ -108,8 +108,8 @@ class Candidato(models.Model):
     )
     semestre = models.IntegerField(null=False)
     propuesta = models.CharField(max_length=200)
-    def __str__(self):
-        return self.nombre
+    def __int__(self):
+        return self.id
 
     class Meta:
         app_label = 'app_votaciones'
@@ -125,13 +125,13 @@ class Voto(models.Model):
         null=False,
         on_delete=models.PROTECT
     )
-    fechaHora = models.DateField(auto_now=False, 
+    fechaHora = models.DateTimeField(auto_now=False, 
         auto_now_add=False,
     )
 
 
-    def __str__(self):
-        return self.nombre
+    def __int__(self):
+        return self.id
 
     class Meta:
         app_label = 'app_votaciones'
