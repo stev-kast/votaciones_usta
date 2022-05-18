@@ -11,45 +11,29 @@
       <th>Fecha de Finalizacion</th>
       <th>Ciclo</th>
       <th>Tipo</th>
-      <th>Candidato</th>
+      <th>Consultar</th>
     </tr>
   </thead>
   <tbody>
-  <tbody class="toggle">
+    {% if votaciones %}
+    {% for votacion in votaciones %}
     <tr>
-      <td>Votacion Semestre 2022-1</td>
-      <td>10/03/2022</td>
-      <td>20/03/2022</td>
-      <td>2022-1</td>
+      <td>{{ votacion.nombre }}</td>
+      <td>{{ votacion.start_date }}</td>
+      <td>{{ votacion.end_date }}</td>
+      <td> Update Model! </td>
+      {% if votacion.idTipo_id == 1 %}
       <td>Semestre</td>
-      <td>Camila Cabello</td>
+      {% else %}
+      <td>Facultad</td>
+      {% endif %}
+      <form action="{% url 'app:listCandidates' %}" method="post">
+        {% csrf_token %}
+        <td><button type="submit" name='id' value={{votacion.id}}>Consultar</button></td>
+      </form>
     </tr>
-  </tbody>
-  <tbody class="hidden">
-    <tr>
-      <thead>
-        <tr>
-          <th colspan="5">Candidato</th>
-          <th>Tu voto</th>
-        </tr>
-      </thead>
-  <tbody>
-    <tr>
-      <td colspan="5">Juan Casallas</td>
-      <td><input type="radio" disabled></td>
-    </tr>
-    <tr>
-      <td colspan="5">Ernesto Vega</td>
-      <td><input type="radio" disabled></td>
-    </tr>
-    <tr>
-      <td colspan="5">Camila Cabello</td>
-      <td><input type="radio" disabled checked></td>
-    </tr>
-  </tbody>
-  </tr>
-  </tbody>
-  </tbody>
+    {% endfor %}
+    {% endif %}  </tbody>
 </table>
 {% endblock %}
 <!-- https://codepen.io/andornagy/pen/gaGBZz -->

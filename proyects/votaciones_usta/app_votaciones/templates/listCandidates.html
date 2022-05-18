@@ -2,12 +2,15 @@
 {% load static %}
 {% block title %}Votar por un candidato a Representante de Semestre{% endblock %}
 {% block main %}
+{% if candidatoVotado %}
+  <h3> Usted ya participo en esta votacion </h3>
+{% endif %}
 <table>
   <thead>
     <tr>
       <th>Candidato</th>
       <th colspan="2">Propuesta</th>
-      <th>Seleccion unica</th>
+      <th>Tu voto</th>
     </tr>
   </thead>
   <tbody>
@@ -16,10 +19,18 @@
     <tr>
       <td>{{ estudiante.nombre }} {{ estudiante.apellido }}</td>
       <td colspan="2">{{ estudiante.propuesta }}</td>
+      {% if candidatoVotado %}
+      {% if estudiante.idCandidato == candidatoVotado.id %}
+       <td><button>Votado</button></td>
+      {% else %}
+      <td><button>Disabled</button></td>
+      {% endif %}
+      {% else %}
       <form action="{% url 'app:vote' %}" method="post">
         {% csrf_token %}
         <td><button type="submit" name='id' value={{estudiante.idCandidato}}>Votar</button></td>
       </form>
+      {% endif %}
     </tr>
     {% endfor %}
     {% endif %}

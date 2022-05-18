@@ -229,11 +229,23 @@ def vote(request):
                 idVotante=Estudiante.objects.get(id=votante),
                 fechaHora=datetime.now())
     voto.save()
-    print(voto)
-    return render(request, 'voteCycle.html')
+    return render(request, 'consultMyVote.html')
 
 @login_required
 def listCandidates(request):
+    # Se obtienen los votos de el usuario actual en todas las votaciones en las que ha participado
+    misVotos = list(Voto.objects.filter(idVotante=request.user.id).values())
+    # Se crea el candidatoVotado en caso de que el usuario autenticado ya haya votado en esta votacion 
+    candidatoVotado = None
+    # Se verifica si alguno de los candidatos por los que el usuario ha votado tiene que ver con la votacion que se esta consultando actualmente
+    for voto in misVotos:
+        candidato = list(Candidato.objects.filter(id=voto["idCandidato_id"]).values())[0]
+        votacion = list(Votacion.objects.filter(id=candidato["idVotacion_id"]).values())[0]
+        # En caso de que alguna de las votaciones en las que el usuario ha participado sea la misma que se esta consultando se guarda el candidato por el cual voto
+        if votacion['id'] == int(request.POST['id']):
+            candidatoVotado = candidato
+
+    # Se obtienen los candidatos de la votacion que se esta consultando actualmente
     candidatos = list(Candidato.objects.filter(idVotacion=request.POST['id']))
     # Se obtienen los usuarios que son candidatos a la votacion
     estudiantes = []
@@ -241,7 +253,11 @@ def listCandidates(request):
         estudiantes.append({"nombre":list(User.objects.filter(id=i.idEstudiante_id).values())[0].get("first_name"),
                             "apellido":list(User.objects.filter(id=i.idEstudiante_id).values())[0].get("last_name"), 
                             "propuesta":i.propuesta, "idCandidato":i.id})
+    # Se construye el objeto a enviar al template
     contexto = {'estudiantes': estudiantes}
+    # Si ya hay un candidato por el cual el usuario actual voto entonces se anexa a la informacion enviada al template
+    if candidato is not None:
+        contexto = {'estudiantes':estudiantes,'candidatoVotado':candidatoVotado}
     return render(request, 'listCandidates.html', contexto)
 
 
@@ -257,7 +273,13 @@ def consultVoteResults(request):
 
 @login_required
 def consultMyVote(request):
-    return render(request, 'consultMyVote.html')
+    misVotos = list(Voto.objects.filter(idVotante=request.user.id).values())
+    votaciones = []
+    for voto in misVotos:
+        candidato = list(Candidato.objects.filter(id=voto["idCandidato_id"]).values())[0]
+        votaciones.append(list(Votacion.objects.filter(id=candidato["idVotacion_id"]).values())[0])
+    contexto = {"votaciones":votaciones}
+    return render(request, 'consultMyVote.html',contexto)
 
 @login_required
 def consultVotingListStudent(request):
