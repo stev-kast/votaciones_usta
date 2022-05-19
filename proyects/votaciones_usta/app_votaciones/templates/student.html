@@ -13,40 +13,41 @@
 <body>
     <div class="grid-container">
         <div class="header">
-            <span>{{ request.user.is_authenticated }}</span>
+            <!-- <span>{{ request.user.is_authenticated }}</span> -->
             <h1>Sistema Votaciones USTA</h1>
-            <span>{{ request.user.email }}</span>
         </div>
-        <div class="logOut"><a href="{% url 'app:view_logout' %}">Cerrar Sesion</a></div>
+        <div class="logOut">
+            <span>{{ request.user.email }}</span>
+            <a href="{% url 'app:view_logout' %}">Cerrar Sesion</a></div>
         <div class="menu">
             <dl>
                 <dt>Postularse</dt>
                 <dd>
-                    <a href="/applyToCycleVoting">Postularse como candidato a Representante de Semestre</a>
+                    <a href="/applyToCycleVoting">Como candidato a Representante de Semestre</a>
                 </dd>
                 <dt>Votar</dt>
                 <dd>
                     <a href="/voteCycle">
-                        Votar por un candidato a Representante de Semestre
+                        Por un candidato a Representante de Semestre
                     </a>
                 </dd>
                 <dd>
                     <a href="/voteFaculty">
-                        Votar por un candidato a Representante de Facultad
+                        Por un candidato a Representante de Facultad
                     </a>
                 </dd>
                 <dt>Consultar</dt>
                 <dd>
                     <a href="/consultVoteResults">
-                        Ver resultados finales de una votación
+                        Resultados finales de una votación
                     </a>
                 </dd>
                 <dd>
-                    <a href="/consultMyVote"> Consultar mi voto en una votación </a>
+                    <a href="/consultMyVote"> Mi voto en una votación </a>
                 </dd>
                 <dd>
                     <a href="/consultVotingListStudent">
-                        Consultar la lista de votaciones
+                        Lista de votaciones
                     </a>
                 </dd>
             </dl>

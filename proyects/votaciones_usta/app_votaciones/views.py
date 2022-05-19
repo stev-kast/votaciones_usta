@@ -303,7 +303,11 @@ def consultMyVote(request):
 
 @login_required
 def consultVotingListStudent(request):
-    return render(request, 'consultVotingListStudent.html')
+    query = Votacion.objects.all()
+    lista = list(query.values())
+    fac = Facultad.objects.get(id=Estudiante.objects.get(id=request.user.id).idFacultad_id)
+    contexto = {"votaciones":lista, "facultad":fac, "facultad_id":fac.id }
+    return render(request, 'consultVotingListStudent.html',contexto)
 
 @login_required
 def consultFacultyStudentList(request):
