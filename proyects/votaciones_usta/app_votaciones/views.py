@@ -265,7 +265,7 @@ def listCandidates(request):
 def voteFaculty(request):
     votaciones = Votacion.objects.filter(idFacultad=Estudiante.objects.get(id=request.user.id).idFacultad_id)
     contexto = {"votaciones":votaciones}
-    return render(request, 'voteFaculty.html')
+    return render(request, 'voteFaculty.html',contexto)
 
 @login_required
 def consultVoteResults(request):

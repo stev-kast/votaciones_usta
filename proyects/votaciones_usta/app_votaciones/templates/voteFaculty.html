@@ -1,6 +1,6 @@
 {% extends "student.html" %}
 {% load static %}
-{% block title %}Votar por un candidato a Representante de Facultad{% endblock %}
+{% block title %}Votar por un candidato a Representante de Semestre{% endblock %}
 {% block main %}
 <h3>Votar por un candidato a Representante de Facultad</h3>
 <table>
@@ -13,42 +13,21 @@
     </tr>
   </thead>
   <tbody>
-  <tbody class="toggle">
+    {% if votaciones %}
+    {% for votacion in votaciones %}
+    {% if votacion.idEstado_id == 2 and votacion.idTipo_id == 2 %}
     <tr>
-      <td>Votacion Facultad 2022-1</td>
-      <td>10/03/2022</td>
-      <td>20/03/2022</td>
-      <td><button>Votar</button></td>
+      <td>{{ votacion.nombre }}</td>
+      <td>{{ votacion.start_date }}</td>
+      <td>{{ votacion.end_date }}</td>
+      <form action="{% url 'app:listCandidates' %}" method="post">
+        {% csrf_token %}
+        <td><button type="submit" name='id' value={{votacion.id}}>Votar</button></td>
+      </form>
     </tr>
-  </tbody>
-  <tbody class="hidden">
-    <tr>
-      <thead>
-        <tr>
-          <th>Candidato</th>
-          <th colspan="2">Propuesta</th>
-          <th>Seleccion unica</th>
-        </tr>
-      </thead>
-  <tbody>
-    <tr>
-      <td>Juan Casallas</td>
-      <td colspan="2">Piscina en el patio de la U</td>
-      <td><input type="radio"></td>
-    </tr>
-    <tr>
-      <td>Ernesto Vega</td>
-      <td colspan="2">WiFi chido</td>
-      <td><input type="radio"></td>
-    </tr>
-    <tr>
-      <td>Camila Melo</td>
-      <td colspan="2">Cafe gratis</td>
-      <td><input type="radio"></td>
-    </tr>
-  </tbody>
-  </tr>
-  </tbody>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
   </tbody>
 </table>
 {% endblock %}

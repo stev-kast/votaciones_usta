@@ -15,7 +15,7 @@
   <tbody>
     {% if votaciones %}
     {% for votacion in votaciones %}
-    {% if votacion.idEstado_id == 2 %}
+    {% if votacion.idEstado_id == 2 and votacion.idTipo_id == 1 %}
     <tr>
       <td>{{ votacion.nombre }}</td>
       <td>{{ votacion.start_date }}</td>
