@@ -30,9 +30,9 @@ def autenticar(request):
     password = request.POST['password']
 
     # Obtiene el usuario
-    #usuario = authenticate(email=email, password=password)
+    usuario = authenticate(username=email, password=password)
     # TODO: authenticate always returning none
-    usuario = User.objects.get(email=email)
+    #usuario = User.objects.get(email=email)
     # Verifica si el usuario existe en la base de datos
     if usuario is not None:
         # Inicia la sesión del usuario en el sistema
