@@ -19,7 +19,6 @@
   <tbody>
     {% if votaciones %}
     {% for votacion in votaciones %}
-
     {% if votacion.idTipo_id == 1 and facultad_id == votacion.idFacultad_id %}
     <tr>
       <td>{{votacion.nombre}}</td>

@@ -269,7 +269,27 @@ def voteFaculty(request):
 
 @login_required
 def consultVoteResults(request):
-    return render(request, 'consultVoteResults.html')
+    fac = Facultad.objects.get(id=Estudiante.objects.get(id=request.user.id).idFacultad_id)
+    votaciones = Votacion.objects.filter(idFacultad=Estudiante.objects.get(id=request.user.id).idFacultad_id)
+    contexto = {"votaciones":votaciones, "facultad":fac, "facultad_id":fac.id }
+    return render(request, 'consultVoteResults.html', contexto)
+
+@login_required
+def listResults(request):
+    # Se obtienen los candidatos de la votacion que se esta consultando actualmente
+    candidatos = list(Candidato.objects.filter(idVotacion=request.POST['id']))
+    # Se obtienen los usuarios que son candidatos a la votacion
+    estudiantes = []
+    for i in candidatos:
+        conteoVotos = len(list(Voto.objects.filter(idCandidato=i).values()))
+        estudiantes.append({"nombre":list(User.objects.filter(id=i.idEstudiante_id).values())[0].get("first_name"),
+                            "apellido":list(User.objects.filter(id=i.idEstudiante_id).values())[0].get("last_name"), 
+                            "propuesta":i.propuesta, "idCandidato":i.id,
+                            "conteoVotos":conteoVotos})
+    # Se construye el objeto a enviar al template
+    contexto = {'estudiantes': estudiantes}
+    return render(request, 'listResults.html', contexto)
+
 
 @login_required
 def consultMyVote(request):

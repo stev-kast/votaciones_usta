@@ -22,7 +22,6 @@ urlpatterns = [
     path('changeFacultyVotingStatus/', views.changeFacultyVotingStatus, name='changeFacultyVotingStatus'),
     path('consultFacultyVoting/', views.consultFacultyVoting, name='consultFacultyVoting'),
     path('consultVotingListDean/', views.consultVotingListDean, name='consultVotingListDean'),
-    #
     path('applyToCycleVoting/', views.applyToCycleVoting, name='applyToCycleVoting'),
     path('applyToVoting/', views.applyToVoting, name='applyToVoting'),
     path('voteCycle/', views.voteCycle, name='voteCycle'),
@@ -30,9 +29,8 @@ urlpatterns = [
     path('vote/', views.vote, name='vote'),
     path('listCandidates/', views.listCandidates, name='listCandidates'),
     path('consultVoteResults/', views.consultVoteResults, name='consultVoteResults'),
+    path('listResults/', views.listResults, name='listResults'),
     path('consultMyVote/', views.consultMyVote, name='consultMyVote'),
     path('consultVotingListStudent/', views.consultVotingListStudent, name='consultVotingListStudent'),
-    #
     path('consultFacultyStudentList/', views.consultFacultyStudentList, name='consultFacultyStudentList'),
-    #
 ]

@@ -1,0 +1,26 @@
+{% extends "student.html" %}
+{% load static %}
+{% block title %}Votar por un candidato a Representante de Semestre{% endblock %}
+{% block main %}
+{% if candidatoVotado %}
+  <h3> Usted ya participo en esta votacion </h3>
+{% endif %}
+<table>
+  <thead>
+    <tr>
+      <th>Candidato</th>
+      <th>Votos</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if estudiantes %}
+    {% for estudiante in estudiantes %}
+    <tr>
+      <td>{{ estudiante.nombre }} {{ estudiante.apellido }}</td>
+      <td>{{ estudiante.conteoVotos }} </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}
