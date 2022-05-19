@@ -13,6 +13,12 @@
 <input type="date" id="startDate" name="startdate" />
 <label for="endDate">Fecha de Finalizacion*</label>
 <input type="date" id="endDate" name="enddate" />
+<label for="semester">Semestre*</label>
+<select id="semester" name="semester">
+  {% for i in range10 %}
+  <option value={{i}}>{{ i }}</option>
+  {% endfor %}
+</select>
 <label for="cycle">Ciclo*</label>
 <select id="cycle" name="cycle">
   <option value="20221">2022-1</option>

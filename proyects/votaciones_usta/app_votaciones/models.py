@@ -69,6 +69,8 @@ class TipoVotacion(models.Model):
 
 class Votacion(models.Model):
     nombre = models.CharField(max_length=45)
+    semestre = models.IntegerField(null=False,
+                                   default=10)
     start_date = models.DateField(
                                 auto_now=False, 
 	                            auto_now_add=False,

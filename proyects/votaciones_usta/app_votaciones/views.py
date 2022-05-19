@@ -80,7 +80,7 @@ def addStudent(request):
         first_name=names,
         last_name=last_name,
         email=email,
-        username=email)
+        username=password)
     usuario.set_password(password)
     # Guarda el usuario en la base de datos
     usuario.save()
@@ -97,7 +97,8 @@ def addStudent(request):
 def createCycleVoting(request):
     query = Decano.objects.get(id_id=request.user.id)
     query = Facultad.objects.get(id=query.idFacultad_id)
-    contexto = {"Facultad":query.nombre}
+    contexto = {"Facultad":query.nombre,
+                "range10": range(1,11)}
     return render(request, 'createCycleVoting.html',contexto)
 
 @login_required
@@ -111,11 +112,12 @@ def addCycleVoting(request):
     faculty = request.POST['faculty']
 
     facultad = Facultad.objects.get(nombre=faculty)
+    semestre = request.POST['semester']
     tipo = TipoVotacion.objects.get(nombre="Semestre")
     estado = EstadoVotacion.objects.get(nombre="Postulacion")
 
     # Crea el objeto de la votacion
-    votacion = Votacion(nombre=name,idFacultad=facultad,start_date=start_date,end_date=end_date,idTipo=tipo,idEstado=estado)
+    votacion = Votacion(nombre=name,idFacultad=facultad,start_date=start_date,end_date=end_date,idTipo=tipo,idEstado=estado,semestre=semestre)
     # Guarda la votacion
     votacion.save()
 
