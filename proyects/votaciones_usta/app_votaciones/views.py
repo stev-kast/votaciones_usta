@@ -219,7 +219,7 @@ def applyToVoting(request):
 
 @login_required
 def voteCycle(request):
-    votaciones = Votacion.objects.filter(idFacultad=Estudiante.objects.get(id=request.user.id).idFacultad_id)
+    votaciones = Votacion.objects.filter(idFacultad=Estudiante.objects.get(id=request.user.id).idFacultad_id,semestre=Estudiante.objects.get(id=request.user.id).idFacultad_id)
     contexto = {"votaciones":votaciones}
     return render(request, 'voteCycle.html', contexto)
 
