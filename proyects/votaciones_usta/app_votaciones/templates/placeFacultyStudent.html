@@ -3,19 +3,25 @@
 {% block title %}Postular estudiante a una votación de Representante de Facultad{% endblock %}
 {% block main %}
 <h3>Postular estudiante a una votación de Representante de Facultad</h3>
-<form action="">
+<form action="{% url 'app:placeStudent' %}" method="post">
+  {% csrf_token %}
   <p>Los campos marcados con un asterisco (*) son obligatorios</p>
   <label for="voting">Votacion*</label>
-  <select id="voting">
-    <option value="20221">Votacion Facultad 2022-1</option>
-    <option value="20212">Votacion Facultad 2021-2</option>
+  <select name="voting">
+    {% if votaciones %}
+    {% for votacion in votaciones %}
+    <option value={{ votacion.id }}>{{ votacion.nombre }}</option>
+    {% endfor %}
+    {% endif %}
   </select>
-  <br /><br />
   <label for="student">Estudiante*</label>
-  <input type="text" id="student" />
-  <br /><br />
-  <label for="" id="errorLabel">
-    Este label indicara cuando existan errores. </label><br /><br />
-  <button>Postular Estudiante</button>
+  <select name="student">
+    {% if estudiantes %}
+    {% for estudiante in estudiantes %}
+    <option value={{estudiante.id}}> {{estudiante.first_name}} {{estudiante.last_name}}</option>
+    {% endfor %}
+    {% endif %}
+  </select>
+  <button type="submit">Postular Estudiante</button>
 </form>
 {% endblock %}

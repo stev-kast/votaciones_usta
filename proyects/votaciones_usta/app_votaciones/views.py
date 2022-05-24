@@ -180,7 +180,30 @@ def addFacultyVoting(request):
 
 @login_required
 def placeFacultyStudent(request):
-    return render(request, 'placeFacultyStudent.html')
+    query = Votacion.objects.filter(idFacultad_id=Decano.objects.get(id=request.user.id).idFacultad_id,idTipo_id=2,idEstado_id=1)
+    lista = list(query.values())
+    fac = Facultad.objects.get(id=Decano.objects.get(id=request.user.id).idFacultad_id)
+
+    # Obtiene los estudiantes de la facultad del decano
+    query = Estudiante.objects.filter(idFacultad=fac)
+    # Se obtienen los usuarios que son estudiantes de la facultad del decano
+    estudiantes = []
+    for i in query:
+        estudiantes.append(list(User.objects.filter(id=i.id_id).values())[0])
+    # Se configura el objeto para enviar al template
+    print(estudiantes)
+    contexto = {"votaciones":lista, "facultad":fac, "facultad_id":fac.id,"estudiantes":estudiantes}
+    return render(request, 'placeFacultyStudent.html',contexto)
+
+@login_required
+def placeStudent(request):
+    votacion = request.POST['voting']
+    estudiante = request.POST['student']
+    candidato = Candidato(idEstudiante=Estudiante.objects.get(id=estudiante),idVotacion=Votacion.objects.get(id=votacion),semestre=1)
+    print(candidato)
+    candidato.save()
+    return redirect('app:consultVotingListDean')
+
 
 @login_required
 def changeFacultyVotingStatus(request):
