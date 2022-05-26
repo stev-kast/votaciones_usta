@@ -143,10 +143,19 @@ def nextStatus(request):
 
 @login_required
 def consultCycleVoting(request):
-    query = Votacion.objects.all()
+    facultad_id = Decano.objects.get(id=request.user.id).idFacultad_id
+    query = Votacion.objects.filter(idTipo_id=1,idFacultad_id=facultad_id)
     lista = list(query.values())
-    fac = Facultad.objects.get(id=Decano.objects.get(id=request.user.id).idFacultad_id)
-    contexto = {"votaciones":lista, "facultad":fac, "facultad_id":fac.id }
+    votaciones = []
+    for votacion in lista:
+        semestre = votacion['semestre']
+        estudiantes = len(Estudiante.objects.filter(idFacultad_id=facultad_id,semestre=semestre))
+        candidatos = Candidato.objects.filter(idVotacion_id=votacion['id'])
+        votos = 0
+        for candidato in candidatos:
+            votos = votos + len(Voto.objects.filter(idCandidato_id=candidato.id))
+        votaciones.append({'id': votacion['id'], 'nombre': votacion['nombre'], 'semestre': votacion['semestre'], 'start_date': votacion['start_date'], 'end_date': votacion['end_date'], 'idEstado_id': votacion['idEstado_id'],'habilitados':estudiantes,'votos':votos})
+    contexto = {"votaciones":votaciones}
     return render(request, 'consultCycleVoting.html', contexto)
 
 
@@ -215,7 +224,19 @@ def changeFacultyVotingStatus(request):
 
 @login_required
 def consultFacultyVoting(request):
-    return render(request, 'consultFacultyVoting.html')
+    facultad_id = Decano.objects.get(id=request.user.id).idFacultad_id
+    query = Votacion.objects.filter(idTipo_id=2,idFacultad_id=facultad_id)
+    lista = list(query.values())
+    votaciones = []
+    for votacion in lista:
+        estudiantes = len(Estudiante.objects.filter(idFacultad_id=facultad_id))
+        candidatos = Candidato.objects.filter(idVotacion_id=votacion['id'])
+        votos = 0
+        for candidato in candidatos:
+            votos = votos + len(Voto.objects.filter(idCandidato_id=candidato.id))
+        votaciones.append({'id': votacion['id'], 'nombre': votacion['nombre'], 'semestre': votacion['semestre'], 'start_date': votacion['start_date'], 'end_date': votacion['end_date'], 'idEstado_id': votacion['idEstado_id'],'habilitados':estudiantes,'votos':votos})
+    contexto = {"votaciones":votaciones}
+    return render(request, 'consultFacultyVoting.html',contexto)
 
 @login_required
 def consultVotingListDean(request):
